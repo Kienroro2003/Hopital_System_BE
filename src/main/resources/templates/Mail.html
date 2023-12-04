@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Hóa đơn</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesdesign" name="author" />
+    <!-- App favicon -->
+
+</head>
+
+<style>
+
+    /*button {*/
+    /*    outline: none;*/
+    /*    border: none;*/
+    /*    background-color: transparent;*/
+    /*}*/
+
+    /*a {*/
+    /*    text-decoration: none;*/
+    /*    color: #000;*/
+    /*}*/
+
+    /*li {*/
+    /*    list-style-type: none;*/
+    /*}*/
+
+
+    /*.col-md-2-4 {*/
+    /*    flex: 0 0 15%;*/
+    /*    max-width: 15%;*/
+    /*}*/
+
+
+    /*.invoice {*/
+    /*    max-width: 700px;*/
+    /*    margin: 0 auto;*/
+    /*}*/
+
+    /*.header {*/
+    /*    border-bottom: 5px solid #333;*/
+    /*    padding-bottom: 15px;*/
+    /*}*/
+
+    /*.sub_invoice {*/
+    /*    padding-right: 50px;*/
+    /*}*/
+
+    /*.sub_invoice p {*/
+    /*    line-height: 1;*/
+    /*}*/
+
+    /*.header_name {*/
+    /*    font-size: 16px;*/
+    /*    padding: 25px 0;*/
+    /*}*/
+
+    /*.infomation {*/
+    /*    border-bottom: 2px dotted #333;*/
+    /*    padding-bottom: 15px;*/
+    /*    margin-bottom: 15px;*/
+    /*}*/
+
+    /*.table {*/
+    /*    border-bottom: 2px solid #333;*/
+    /*}*/
+
+    /*.list_items {*/
+    /*    padding-bottom: 5px;*/
+    /*    font-weight: bold;*/
+    /*}*/
+    button {
+        outline: none;
+        border: none;
+        background-color: transparent;
+    }
+
+    a {
+        text-decoration: none;
+        color: #000;
+    }
+
+    li {
+        list-style-type: none;
+    }
+
+
+    .col-md-2-4 {
+        flex: 0 0 15%;
+        max-width: 15%;
+    }
+
+
+    .invoice {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .header {
+        border-bottom: 5px solid #333;
+        padding-bottom: 15px;
+    }
+
+    .sub_invoice {
+        padding-right: 50px;
+    }
+</style>
+
+<body data-sidebar="dark" >
+
+<!-- Begin page -->
+<div id="layout-wrapper" >
+    <!-- Left Sidebar End -->
+    <div class="main-content bg-light">
+
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="invoice">
+                    <div class="header d-flex justify-content-between">
+                        <div>
+                            <h1>Hóa đơn</h1>
+                        </div>
+                        <div class="sub_invoice">
+                            <p><b  th:text="${'Mã hóa đơn:' + codeBill}"> </b></p>
+                            <p><b id="current-time"></b></p>
+                        </div>
+                    </div>
+                    <div class="infomation">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="infomation__billding">
+                                    <h2 class="header_name">Thông tin khách hàng</h2>
+                                    <div class="info mb-4">
+                                        <div class="company_title font-weight-bold">Họ và tên</div>
+                                        <div class="company_value" th:text="${customer.customerName}" ></div>
+                                        <div class="name_title font-weight-bold">Số điện thoại</div>
+                                        <div class="name_value" th:text="${customer.customerPhone}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="infomation__shipping">
+                                    <h2 class="header_name"><br></h2>
+                                    <div class="info">
+                                        <div class="name_title font-weight-bold">Email</div>
+                                        <div class="name_value" th:text="${customer.customerEmail}"></div>
+                                        <div class="address_title font-weight-bold">Adress</div>
+                                        <div class="address_Value" th:text="${customer.customerAddress}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products">
+                        <h6>Products</h6>
+                        <table class="table">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Sản phẩm</th>
+                                <th scope="col">Đơn giá</th>
+                                <th scope="col">Số lượng</th>
+                                <th scope="col">Thành tiền</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="cart , i : ${cartList}">
+                                <td th:text="${cart.materialId.materialName}"></td>
+                                <td th:text="${cart.materialId.materialPrice}"></td>
+                                <td th:text="${cart.cartId.cartQuantity}"></td>
+                                <td th:text="${cart.cartId.cartTotalMoney}"></td>
+                            </tr>
+                            <!-- total -->
+                            <tr>
+                                <td></td>
+                                <td>Total</td>
+                                <td th:text="${totalMoneyBill}"></td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <div class="tearm-condition">
+                        <h3>Tearms And Conditions</h3>
+                        <div class="list_items">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
+                            corporis cum quod
+                            vitae a delectus inventore fuga architecto temporibus natus.</div>
+                        <div class="list_items">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
+                            corporis cum quod
+                            vitae a delectus inventore fuga architecto temporibus natus.</div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+
+</div>
+
+</div>
+<script>
+    var curDate = new Date();
+
+    // Ngày hiện tại
+    var curDay = curDate.getDate();
+
+    // Tháng hiện tại
+    var curMonth = curDate.getMonth() + 1;
+
+    // Năm hiện tại
+    var curYear = curDate.getFullYear();
+
+    // Gán vào thẻ HTML
+    document.getElementById('current-time').innerHTML = "Ngày: " + curDay + "/" + curMonth + "/" + curYear;
+</script>
+
+</body>
+
+</html>
+
+
